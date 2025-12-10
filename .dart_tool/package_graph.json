@@ -8,6 +8,7 @@
       "version": "1.0.0+1",
       "dependencies": [
         "flutter",
+        "flutter_carousel_widget",
         "flutter_svg"
       ],
       "devDependencies": [
@@ -38,6 +39,13 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "flutter_carousel_widget",
+      "version": "2.3.0",
+      "dependencies": [
+        "flutter"
       ]
     },
     {
