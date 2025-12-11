@@ -8,8 +8,11 @@ import 'package:furni_mobile_app/product/widget/review.dart';
 import 'package:furni_mobile_app/widgets/footer/footer.dart';
 
 class ProductPage extends StatelessWidget {
+  const ProductPage({super.key, required this.onQuantityChanged} );
+  final void Function(int) onQuantityChanged;
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(title: Header(),),
       body: SingleChildScrollView(
@@ -22,13 +25,13 @@ class ProductPage extends StatelessWidget {
                   children: [
                      Navigation(),
                      SizedBox(height: 16,),
-                     Container(
+                     SizedBox(
                       height: 414,
                       width: 311,
                       child: DisplayImages()
                       ),
                      SizedBox(height: 16,),
-                     DetailsCard(),
+                     DetailsCard(onQuantityChanged: onQuantityChanged,),
                      SizedBox(height: 20,),
                      Divider(thickness: 1.5,),
                       SizedBox(height: 15,),
