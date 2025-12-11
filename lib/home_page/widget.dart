@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:furni_project/data/data_cons.dart';
-import 'package:furni_project/product/widget/rating_star.dart'; // ensure correct import
+import 'package:furni_mobile_app/data/data_cons.dart';
+import 'package:furni_mobile_app/product/widget/rating_star.dart'; // ensure correct import
 
 class NewProductCard extends StatelessWidget {
   const NewProductCard({super.key, required this.item});

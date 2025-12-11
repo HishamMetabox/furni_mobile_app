@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:furni_project/home_page/shopNow_widget.dart';
+import 'package:furni_mobile_app/home_page/shopNow_widget.dart';
 
 class Bundle extends StatelessWidget {
   const Bundle({super.key});

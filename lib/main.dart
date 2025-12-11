@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:furni_project/screens/home_screen.dart';
-import 'package:furni_project/navbar/navbar.dart';
-import 'package:furni_project/shop_page/featured_article.dart';
+import 'package:furni_mobile_app/screens/home_screen.dart';
+import 'package:furni_mobile_app/navbar/navbar.dart';
 
 void main() {
   runApp(
@@ -10,12 +9,9 @@ void main() {
       theme: ThemeData(scaffoldBackgroundColor: Colors.transparent),
       home: Scaffold(
         extendBody: true,
-        body: SafeArea(child: FeaturedArticle()),
+        body: SafeArea(child: HomeScreen()),
 
-        bottomNavigationBar: SizedBox(
-          height: 90, // <- VERY IMPORTANT
-          child: GlassFloatingNavBar(),
-        ),
+        bottomNavigationBar: SizedBox(height: 90, child: GlassFloatingNavBar()),
       ),
     ),
   );

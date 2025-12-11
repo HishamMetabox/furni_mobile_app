@@ -51,7 +51,10 @@ class _GlassFloatingNavBarState extends State<GlassFloatingNavBar> {
                   onTap: (i) => setState(() => _selectedIndex = i),
                   items: [
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.home_outlined),
+                      icon: SvgPicture.asset(
+                        'assets/images/home2.svg',
+                        width: 26,
+                      ),
                       label: "Home",
                     ),
                     BottomNavigationBarItem(

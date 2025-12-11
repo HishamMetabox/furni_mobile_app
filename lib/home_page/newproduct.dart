@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:furni_project/data/dummy_data.dart';
-import 'package:furni_project/home_page/widget.dart';
+import 'package:furni_mobile_app/data/dummy_data.dart';
+import 'package:furni_mobile_app/home_page/widget.dart';
 
 class NewArrival extends StatefulWidget {
   const NewArrival({super.key});

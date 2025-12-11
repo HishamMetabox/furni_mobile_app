@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_carousel_widget: ^2.2.0   # ← RECOMMENDED alternative, no conflicts
+  flutter_carousel_widget: ^2.2.0   
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.2.3
   google_fonts: ^6.3.3
@@ -37,7 +37,7 @@ flutter:
     - assets/images/cart_logo.svg
     - assets/images/user-circle.svg
     - assets/images/shop-page.svg
-
+    - assets/images/home2.svg
     - assets/images/product_image_1.jpg
     - assets/images/product_image_2.jpg
     - assets/images/product_image_3.jpg
@@ -65,8 +65,5 @@ flutter:
     - assets/images/lock.svg
     - assets/images/call.svg
     - assets/images/filter.svg
-
-
-
 
 
