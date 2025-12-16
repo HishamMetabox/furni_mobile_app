@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furni_mobile_app/shop/shopPage.dart';
 
 class NewArrival extends StatefulWidget {
   const NewArrival({super.key});
@@ -82,14 +83,14 @@ class _NewArrivalState extends State<NewArrival> {
                         child: Row(
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));},
                               child: const Text(
                                 'Shop now',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));},
                               icon: const Icon(
                                 Icons.arrow_forward,
                                 color: Colors.black,
@@ -142,14 +143,14 @@ class _NewArrivalState extends State<NewArrival> {
                         child: Row(
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));},
                               child: const Text(
                                 'Shop now',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
+                             onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));},
                               icon: const Icon(
                                 Icons.arrow_forward,
                                 color: Colors.black,
@@ -166,18 +167,23 @@ class _NewArrivalState extends State<NewArrival> {
           ),
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Row(
                 children: [
-                  Text(
+                  TextButton(onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));}, child: 
+                   Text(
                     'More Products',
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                  Icon(Icons.arrow_forward, size: 16),
+              
+                  
+                ),
+                Icon(Icons.arrow_forward, size: 16),
+                 
                 ],
               ),
             ),

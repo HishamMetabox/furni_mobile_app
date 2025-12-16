@@ -578,6 +578,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
           ),
         ),
         
-    );
+    ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furni_mobile_app/contactUs/contactus.dart';
 
 class AboutUsSection extends StatelessWidget {
   const AboutUsSection({super.key});
@@ -32,13 +33,16 @@ class AboutUsSection extends StatelessWidget {
 
             child: Column(
               children: [
+                TextButton(onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Contactus()));
+                }, child: 
                 Container(
                   decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(color: Colors.black, width: 1.2),
                     ),
                   ),
-                  padding: const EdgeInsets.only(bottom: 4),
+                  
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
@@ -49,13 +53,14 @@ class AboutUsSection extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
+                            color: Colors.black
                           ),
                         ),
                       ),
-                      Icon(Icons.arrow_forward, size: 16),
+                      Icon(Icons.arrow_forward, size: 16,color: Colors.black),
                     ],
                   ),
-                ),
+                ),),
                 const SizedBox(height: 80),
               ],
             ),

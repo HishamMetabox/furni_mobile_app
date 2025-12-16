@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furni_mobile_app/Items/bottomsheet.dart';
 import 'package:furni_mobile_app/screens/cart_screen.dart';
 // import 'package:furni_mobile_app/screens/profile_screen.dart';
 // import 'package:furni_mobile_app/screens/shop_screen.dart';
@@ -90,10 +91,9 @@ class _GlassFloatingNavBarState extends State<GlassFloatingNavBar> {
                     BottomNavigationBarItem(
                       icon: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => CartScreen()),
-                          );
+                          
+                          showModalBottomSheet(context: context, builder: (ctx)=> BottomCartSheet());
+                          
                         },
                         child: SvgPicture.asset(
                           'assets/images/cart_logo.svg',

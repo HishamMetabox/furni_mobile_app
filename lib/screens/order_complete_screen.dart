@@ -288,9 +288,8 @@ class _OrderCompleteScreenState extends State<OrderCompleteScreen> {
                 ),
               ),
             ],
-          ),
-        ],
-      ),
-    );
+          ));
+        
+  
   }
 }
