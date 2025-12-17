@@ -15,14 +15,17 @@ import 'package:furni_mobile_app/shop/widget/grid.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
+    theme:ThemeData(scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+    )
+  ),
      home:
      Scaffold(
   appBar: AppBar(
-      // automaticallyImplyLeading: false,
       title: Header(),
   ),
-  // extendBody: true,
-  body: SafeArea(child: Shoppage()),
+  body: SafeArea(child: Contactus()),
   bottomNavigationBar: SizedBox(height:90, child:GlassFloatingNavBar(), ) 
       ),
   ),

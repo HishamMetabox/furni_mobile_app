@@ -32,17 +32,17 @@ class Contactus extends StatelessWidget{
                
                SizedBox(height: 40),
                Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(top: 16, left:40, right: 40, bottom: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(20)
                 ),
-                height: 160,
+                
                 child: Center(
                   child: Column(
                     children: [
                       SvgPicture.asset('assets/images/store.svg'),
-                      SizedBox(height: 10),
+                      SizedBox(height: 16),
                       Text('ADDRESS',
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
@@ -50,7 +50,7 @@ class Contactus extends StatelessWidget{
                         fontSize: 16,
                         color: Color.fromARGB(255, 108, 114, 117)
                       ),),
-                      SizedBox(height: 5),
+                      SizedBox(height: 8),
                       Text(textAlign: TextAlign.center,'234 Hai Trieu, Ho Chi Minh City, Viet Nam', 
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
@@ -64,17 +64,16 @@ class Contactus extends StatelessWidget{
                ),
                SizedBox(height: 16),
                 Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(top: 16, left:40, right: 40, bottom: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(20)
                 ),
-                 height: 160,
                 child: Center(
                   child: Column(
                     children: [
                       SvgPicture.asset('assets/images/phone.svg'),
-                      SizedBox(height: 10),
+                      SizedBox(height: 16),
                       Text('CONTACT US',
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
@@ -82,7 +81,7 @@ class Contactus extends StatelessWidget{
                         fontSize: 16,
                         color: Color.fromARGB(255, 108, 114, 117)
                       ),),
-                      SizedBox(height: 5),
+                      SizedBox(height: 8),
                       Text(textAlign: TextAlign.center,'+84 234 567 890', 
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
@@ -96,8 +95,7 @@ class Contactus extends StatelessWidget{
                ),
                SizedBox(height: 16),
                 Container(
-                height: 160,
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(top: 16, left:40, right: 40, bottom: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(20)
@@ -106,7 +104,7 @@ class Contactus extends StatelessWidget{
                   child: Column(
                     children: [
                       SvgPicture.asset('assets/images/mail.svg'),
-                      SizedBox(height: 10),
+                      SizedBox(height: 16),
                       Text('EMAIL',
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
@@ -114,7 +112,7 @@ class Contactus extends StatelessWidget{
                         fontSize: 16,
                         color: Color.fromARGB(255, 108, 114, 117)
                       ),),
-                      SizedBox(height: 5),
+                      SizedBox(height: 8),
                       Text(textAlign: TextAlign.center,'hello@furni.com', 
                       style: TextStyle(
                         fontFamily: GoogleFonts.inter().fontFamily,
