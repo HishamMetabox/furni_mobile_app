@@ -215,7 +215,7 @@ class CartItem {
     required this.price,
     required this.imageUrl,
     required this.category,
-    required this.quantity
+    required this.quantity,
   }); 
   final int id;
   final String productName;
@@ -224,6 +224,7 @@ class CartItem {
   final String imageUrl;
   final Category category;
   int quantity;
+ 
   
 }
 

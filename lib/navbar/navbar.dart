@@ -92,7 +92,18 @@ class _GlassFloatingNavBarState extends State<GlassFloatingNavBar> {
                       icon: GestureDetector(
                         onTap: () {
                           
-                          showModalBottomSheet(context: context, builder: (ctx)=> BottomCartSheet());
+                          showModalBottomSheet(
+  context: context,
+  isScrollControlled: true,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.zero,
+  ),
+  clipBehavior: Clip.antiAlias,
+  builder: (ctx) => const BottomCartSheet(),
+);
+
+                          
+                          
                           
                         },
                         child: SvgPicture.asset(

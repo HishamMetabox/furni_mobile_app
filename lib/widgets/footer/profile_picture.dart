@@ -9,7 +9,7 @@ class ProfilePicture extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 70,
-          backgroundColor: Colors.grey.shade300,
+         
           backgroundImage: AssetImage('assets/images/profile_picture.jpg'),
         ),
         Positioned(

@@ -174,15 +174,19 @@ class _NewArrivalState extends State<NewArrival> {
               child: Row(
                 children: [
                   TextButton(onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));}, child: 
-                   Text(
-                    'More Products',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
+                   Row(
+                     children: [
+                       Text(
+                        'More Products',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                         ), Icon(Icons.arrow_forward, size: 16),
+                     ],
+                   ),
               
                   
                 ),
-                Icon(Icons.arrow_forward, size: 16),
+               
                  
                 ],
               ),

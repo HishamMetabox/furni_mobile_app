@@ -95,7 +95,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                   
                       widget.onQuantityChanged(value);
                       widget.onPriceChanged(widget.item.price * value);
-                    },max: 9,
+                      
+                    },
                   ),
                   
                     ],

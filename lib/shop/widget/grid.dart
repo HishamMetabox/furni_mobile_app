@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:furni_mobile_app/data/data_cons.dart';
+import 'package:furni_mobile_app/product/Product_page.dart';
 import 'package:furni_mobile_app/product/widget/rating_star.dart';
-class ProductGrid extends StatelessWidget {
+class ProductGrid extends StatefulWidget {
   const ProductGrid({super.key, required this.items});
 
   final List<CartItem> items;
 
+  @override
+  State<ProductGrid> createState() => _ProductGridState();
+}
+
+class _ProductGridState extends State<ProductGrid> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -18,9 +24,9 @@ class ProductGrid extends StatelessWidget {
         mainAxisSpacing: 16,
         childAspectRatio: 0.65,
       ),
-      itemCount: items.length,
+      itemCount: widget.items.length,
       itemBuilder: (context, index) {
-        final item = items[index];
+        final item = widget.items[index];
 
         // image logic MUST be here
         ImageProvider imageProvider;
@@ -38,50 +44,56 @@ class ProductGrid extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
+              child: TextButton(
+                onPressed:() {Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ProductPage(onQuantityChanged: (value){setState(() {
+                });})));},
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 10,
-                      right: 10,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: IconButton(
-                          icon: const Icon(Icons.favorite_border),
-                          onPressed: () {},
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 10,
+                        right: 10,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            icon: const Icon(Icons.favorite_border),
+                            onPressed: () {setState(() {
+                             Colors.red;
+                            });},
+                          ),
                         ),
                       ),
-                    ),
-
-                    Positioned(
-                      top: 12,
-                      left: 12,
-                      child: Column(
-                        children: [
-                          _tag('New', Colors.white, Colors.black),
-                          const SizedBox(height: 6),
-                          _tag('-50%', Colors.green, Colors.white),
-                        ],
+                
+                      Positioned(
+                        top: 12,
+                        left: 12,
+                        child: Column(
+                          children: [
+                            _tag('New', Colors.white, Colors.black),
+                            const SizedBox(height: 6),
+                            _tag('-50%', Colors.green, Colors.white),
+                          ],
+                        ),
                       ),
-                    ),
-
-                    Positioned(
-                      bottom: 10,
-                      left: 10,
-                      right: 10,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Add to Cart'),
+                
+                      Positioned(
+                        bottom: 10,
+                        left: 10,
+                        right: 10,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Add to Cart'),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

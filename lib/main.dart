@@ -8,10 +8,9 @@ import 'package:furni_mobile_app/shop/shopPage.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Scaffold(
-      body: Shoppage(),
-      bottomNavigationBar: SizedBox(height: 90, child: GlassFloatingNavBar(),),
-    ),
+    home:  HomeScreen(),
+      
+    
     
   ));
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CarouselWidget extends StatefulWidget {
   const CarouselWidget({super.key});
@@ -10,6 +11,24 @@ class CarouselWidget extends StatefulWidget {
 
 class _CarouselWidgetState extends State<CarouselWidget> {
   int _currentIndex = 0;
+  List<Map<String, String>>myCarouselwithText =[
+  {
+    'image': 'assets/images/carousel1.png',
+    'text': 'Transform Your Space, Elevate Your Life',
+  },
+  {
+    'image': 'assets/images/carousel2.png',
+     'text': 'Transform Your Space, Elevate Your Life',
+  },
+  {
+    'image': 'assets/images/carousel3.png',
+    'text': 'Transform Your Space, Elevate Your Life',
+  },
+];
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +46,38 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                // ---- CAROUSEL ----
+              
                 FlutterCarousel(
-                  items: [
-                    Image.asset(
-                      'assets/images/carousel1.png',
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/images/carousel2.png',
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/images/carousel3.png',
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
+                  items: myCarouselwithText.map((item) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+
+        /// IMAGE
+        Image.asset(
+          item['image']!,
+          fit: BoxFit.cover,
+        ),
+
+        /// TEXT ON TOP
+        Positioned(
+          top: 18,
+          left: 35,
+          right: 5,
+          child: Text(
+            item['text']!,
+            textAlign: TextAlign.left,
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }).toList(),
+              
                   options: CarouselOptions(
                     height: 350,
                     viewportFraction: 1.0,
@@ -56,7 +88,11 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       setState(() => _currentIndex = index);
                     },
                   ),
+
+                  
                 ),
+              
+                
 
                 // ---- CUSTOM INDICATOR ----
                 Positioned(
@@ -85,11 +121,10 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                     }),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+                 
+  ]
+  )
+  ))]);}
+        }
+  
+

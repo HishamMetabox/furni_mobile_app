@@ -4,6 +4,7 @@ import 'package:furni_mobile_app/Header/header.dart';
 import 'package:furni_mobile_app/home_page/bundle.dart';
 import 'package:furni_mobile_app/home_page/carousel.dart';
 import 'package:furni_mobile_app/home_page/newproduct.dart';
+import 'package:furni_mobile_app/navbar/navbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,11 +12,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Header(), automaticallyImplyLeading: false,),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              Header(),
               CarouselWidget(),
               Bundle(),
               NewArrival(),
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar:  SizedBox(height: 90, child: GlassFloatingNavBar(),),
     );
   }
 }

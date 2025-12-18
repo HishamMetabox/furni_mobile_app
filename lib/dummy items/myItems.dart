@@ -9,6 +9,7 @@ final dummycart = [
     imageUrl: 'assets/images/a40cc85f069a0857fe7da4976ba73bf5db64a055.jpg',
     category: Category.livingRoom,
     quantity: 1
+   
 
     
   ),
@@ -20,7 +21,8 @@ final dummycart = [
     price: 30.0,
     imageUrl: 'assets/images/sofa.png',
     category: Category.livingRoom,
-    quantity: 1
+     quantity:1
+   
   ),
     CartItem(
       id: 2,
@@ -29,7 +31,8 @@ final dummycart = [
     price: 50.0,
     imageUrl: 'assets/images/Dining table.png',
     category: Category.diningRoom,
-    quantity: 1
+     quantity:1,
+   
     
   ),
 

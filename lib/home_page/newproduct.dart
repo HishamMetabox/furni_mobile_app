@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furni_mobile_app/data/dummy_data.dart';
 import 'package:furni_mobile_app/home_page/widget.dart';
+import 'package:furni_mobile_app/shop/shopPage.dart';
 
 class NewArrival extends StatefulWidget {
   const NewArrival({super.key});
@@ -96,31 +97,40 @@ class _NewArrivalState extends State<NewArrival> {
         const SizedBox(height: 16),
 
         // ---------------- More Products ----------------
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Container(
-            decoration: const BoxDecoration(
+Row(
+              mainAxisSize: MainAxisSize.min,
+              children:  [
+                Padding(
+                  padding: EdgeInsets.only(right: 6.0),
+                  child:  TextButton(onPressed:(){Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Shoppage()));}, child: 
+                   Column(
+                     children: [
+                       Row(
+                         children: [
+                           Container(
+                             decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(color: Colors.black, width: 1.2),
               ),
             ),
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 6.0),
-                  child: Text(
-                    'More Products',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
+                     padding: const EdgeInsets.only(bottom: 4),
+                             child: Text(
+                              'More Products',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+                              
+                                               ),
+                           ), Icon(Icons.arrow_forward, size: 16, color: Colors.black),
+                         ],
+                       ),
+                     ],
+                   ),
+              
+                  
                 ),
-                Icon(Icons.arrow_forward, size: 16),
+                   )
               ],
             ),
-          ),
-        ),
-      ],
-    );
+         ] );
   }
 }
