@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:furni_mobile_app/widgets/user_profile.dart';
+import 'package:furni_mobile_app/widgets/account details.dart';
 
 class AddressDetails extends StatelessWidget {
   const AddressDetails({super.key});

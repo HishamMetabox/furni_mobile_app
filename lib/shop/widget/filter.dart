@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:furni_mobile_app/shop/data/dummy.dart';
+import 'package:furni_mobile_app/shop/widget/productFilter.dart';
+import 'package:furni_mobile_app/product/data/dummyData.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   const FilterBottomSheet({super.key});
@@ -10,12 +11,14 @@ class FilterBottomSheet extends StatefulWidget {
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
+  String? selectedCategory;
   RangeValues _currentRange = const RangeValues(0, 234);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
-      height: 500,
+      padding: const EdgeInsets.all(15),
+      height: 450,
       width: double.infinity,
       child: SingleChildScrollView(
         child: Column(
@@ -24,14 +27,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Colors.black,
-                    size: 16,
-                  ),
+                  icon: const Icon(Icons.arrow_back_ios_new, size: 16),
+                  onPressed: () => Navigator.pop(context),
                 ),
                 Text(
                   'Filter',
@@ -39,100 +36,104 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     fontFamily: GoogleFonts.inter().fontFamily,
-                    color: Colors.black,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               'Category',
               style: TextStyle(
-                fontFamily: GoogleFonts.inter().fontFamily,
-                fontWeight: FontWeight.w600,
                 fontSize: 16,
-                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontFamily: GoogleFonts.inter().fontFamily,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: category.map((item) {
+                  final isSelected = selectedCategory == item;
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    margin: const EdgeInsets.only(right: 10),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor: Colors.white,
+                        backgroundColor:
+                            isSelected ? const Color.fromARGB(255, 92, 92, 92) : const Color.fromARGB(255, 0, 0, 0),
+                        foregroundColor: isSelected ? const Color.fromARGB(255, 0, 0, 0) : const Color.fromARGB(255, 255, 255, 255),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          selectedCategory =
+                              selectedCategory == item ? null : item;
+                        });
+                      },
                       child: Text(item),
                     ),
                   );
                 }).toList(),
               ),
             ),
-            SizedBox(height: 24),
+
+            const SizedBox(height: 24),
+
             Text(
               'Price Range',
               style: TextStyle(
-                fontFamily: GoogleFonts.inter().fontFamily,
-                fontWeight: FontWeight.w600,
                 fontSize: 16,
-                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontFamily: GoogleFonts.inter().fontFamily,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Text(
                   "Rs ${_currentRange.start.toInt()}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   "Rs ${_currentRange.end.toInt()}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               ],
             ),
-
-            const SizedBox(height: 8),
             RangeSlider(
               values: _currentRange,
               min: 0,
               max: 234,
               activeColor: Colors.black,
               inactiveColor: Colors.grey.shade300,
-              onChanged: (RangeValues values) {
-                setState(() {
-                  _currentRange = values;
-                });
-              },
+              onChanged: (values) => setState(() => _currentRange = values),
             ),
-            SizedBox(height: 32),
+
+            const SizedBox(height: 32),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
+                fixedSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                fixedSize: Size(600, 50),
               ),
-              onPressed: () {},
-              child: Text('Apply Filter'),
+              onPressed: () {
+                Navigator.pop(
+                  context,
+                  ProductFilter(
+                    category: selectedCategory,
+                    minPrice: _currentRange.start,
+                    maxPrice: _currentRange.end,
+                  ),
+                );
+              },
+              child: const Text('Apply Filter'),
             ),
           ],
         ),
