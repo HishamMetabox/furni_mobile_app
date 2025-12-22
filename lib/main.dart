@@ -4,6 +4,7 @@ import 'package:furni_mobile_app/navbar/navbar.dart';
 import 'package:furni_mobile_app/screens/cart_screen.dart';
 import 'package:furni_mobile_app/screens/home_screen.dart';
 import 'package:furni_mobile_app/screens/homme.dart';
+import 'package:furni_mobile_app/screens/splash_screen.dart';
 import 'package:furni_mobile_app/shop/shopPage.dart';
 import 'package:furni_mobile_app/Header/header.dart';
 void main() {
@@ -16,7 +17,7 @@ void main() {
   ),
      home:
      Scaffold(
-        body: SafeArea(child: Shoppage()),
+        body: SafeArea(child: SplashScreen()),
       ),
   ),
 );

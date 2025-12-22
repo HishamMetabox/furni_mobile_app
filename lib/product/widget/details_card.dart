@@ -27,7 +27,7 @@ class DetailsCard extends StatefulWidget{
   final double price;
   final String measurements;
   final List<String> colours;
-  final List<int> quantity;
+  final int quantity;
   final int rating;
 
   @override

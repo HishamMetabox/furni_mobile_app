@@ -64,19 +64,19 @@ class _MyAccountState extends State<MyAccount> {
 
                   Column(
                     children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: ProfilePicture(
-                            imagePath: UserProfile.profileImagePath,
-                            onImageSelected: (path) {
-                              setState(() {
-                                UserProfile.profileImagePath = path;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
+                      // Center(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(top: 15),
+                      //     child: ProfilePicture(
+                      //       imagePath: UserProfile.profileImagePath,
+                      //       onImageSelected: (path) {
+                      //         setState(() {
+                      //           UserProfile.profileImagePath = path;
+                      //         });
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(height: 15),
                       Text(
                         UserProfile.displayName,

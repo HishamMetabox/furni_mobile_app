@@ -5,6 +5,7 @@ import 'package:furni_mobile_app/Items/bottomsheet.dart';
 // import 'package:furni_mobile_app/screens/profile_screen.dart';
 // import 'package:furni_mobile_app/screens/shop_screen.dart';
 import 'package:furni_mobile_app/screens/home_screen.dart';
+import 'package:furni_mobile_app/screens/my_account.dart';
 
 import 'package:furni_mobile_app/shop/shopPage.dart';
 
@@ -118,7 +119,7 @@ class _GlassFloatingNavBarState extends State<GlassFloatingNavBar> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const HomeScreen()),
+                                  builder: (_) => const MyAccount()),
                             );
                           },
                           child: SvgPicture.asset(
