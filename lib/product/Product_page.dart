@@ -66,7 +66,7 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   const Divider(thickness: 1.5),
                   const SizedBox(height: 15),
-                  const AddReview(),
+                        AddReview(productId:product_id.toString()),
                   const SizedBox(height: 20),
                   const Review(),
                 ],
