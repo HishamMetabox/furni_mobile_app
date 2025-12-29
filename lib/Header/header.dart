@@ -105,7 +105,7 @@ class _HeaderState extends State<Header> {
   void _showOverlay() {
     _removeOverlay();
     _overlayEntry = OverlayEntry(builder: (_) => _buildOverlay());
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(context, rootOverlay: true)!.insert(_overlayEntry!);
   }
 
   void _updateOverlay() {
@@ -120,11 +120,13 @@ class _HeaderState extends State<Header> {
   Widget _buildOverlay() {
     return Positioned.fill(
       top: MediaQuery.of(context).padding.top + 80,
-      child: GestureDetector(
-        onTap: () => _toggle(false),
-        child: Material(
-          color: Colors.black54,
-          child: Container(
+      child: Stack(
+        children: [
+          GestureDetector(
+            onTap: () => _toggle(false),
+            child: Container(color: Colors.black54),
+          ),
+          Material(
             color: Colors.white,
             child: Column(
               children: [
@@ -144,7 +146,6 @@ class _HeaderState extends State<Header> {
                       itemCount: _results.length,
                       itemBuilder: (_, index) {
                         final product = _results[index];
-
                         return ListTile(
                           title: Text(product['name']),
                           trailing: const Icon(
@@ -162,7 +163,7 @@ class _HeaderState extends State<Header> {
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }

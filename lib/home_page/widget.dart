@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:furni_mobile_app/product/Product_page.dart';
-import 'package:furni_mobile_app/product/data/dummyData.dart';
+import 'package:furni_mobile_app/models/product_model.dart';
 import 'package:furni_mobile_app/product/widget/rating_star.dart';
 import 'package:furni_mobile_app/home_page/toggle_favorite.dart';
-import 'package:furni_mobile_app/screens/home_screen.dart';
 
 class NewProductCard extends StatelessWidget {
-  const NewProductCard({
-    super.key,
-    required this.item,
-  });
+  const NewProductCard({super.key, required this.item});
 
-  /// ✅ SINGLE product, not a list
   final Product item;
 
   @override
   Widget build(BuildContext context) {
-    int qty = 1;
+    final ImageProvider img = item.imageUrl.startsWith('http')
+        ? NetworkImage(item.imageUrl)
+        : AssetImage(item.imageUrl) as ImageProvider;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -24,26 +22,25 @@ class NewProductCard extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => ProductPage(
-                onQuantityChanged:(value) => qty = value,
-                product_id: item.id)),
+              MaterialPageRoute(
+                builder: (_) => ProductPage(
+                  onQuantityChanged: (int _) {},
+                  product_id: item.id,
+                ),
+              ),
             );
           },
           child: Container(
-            width: 260, // OK if NOT inside GridView
+            width: 260,
             height: 290,
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: const Color.fromARGB(0, 236, 239, 239),
               borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: AssetImage(item.display_image),
-                fit: BoxFit.fitWidth,
-              ),
+              image: DecorationImage(image: img, fit: BoxFit.cover),
             ),
             child: Stack(
               children: [
-                /// FAVORITE BUTTON
                 Positioned(
                   top: 13,
                   right: 10,
@@ -53,8 +50,6 @@ class NewProductCard extends StatelessWidget {
                     child: FavoriteToggleButton(),
                   ),
                 ),
-
-                /// BADGES
                 Positioned(
                   top: 16,
                   left: 16,
@@ -74,16 +69,13 @@ class NewProductCard extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                /// ADD TO CART
                 Positioned(
                   bottom: 13,
                   left: 10,
                   right: 10,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          const Color.fromARGB(255, 6, 53, 107),
+                      backgroundColor: const Color.fromARGB(255, 6, 53, 107),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -99,14 +91,12 @@ class NewProductCard extends StatelessWidget {
             ),
           ),
         ),
-
-        /// PRODUCT DETAILS
         Padding(
           padding: const EdgeInsets.only(left: 15, top: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RatingStar(initialRating: item.rating),
+              RatingStar(initialRating: 0),
               const SizedBox(height: 4),
               Text(
                 item.name,
