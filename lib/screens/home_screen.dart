@@ -21,66 +21,32 @@ class _HomeScreenState extends State<HomeScreen> {
     print('🏠 HomeScreen building...');
 
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 80,
-        backgroundColor: Colors.white,
-        elevation: 1,
-        flexibleSpace: SafeArea(
-          child: Header(
-            onProductTap: (productId) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductPage(
-                    product_id: productId,
-                    onQuantityChanged: (qty) {},
-                  ),
-                ),
-              );
-            },
+      appBar: AppBar(title: const Header(), automaticallyImplyLeading: false),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            // Removed 'const' from children list because Services/Carousel are dynamic
+            children: [
+             const SizedBox(
+              height: 300, 
+              child: CarouselWidget()
+             ),
+              const Bundle(),
+              const NewArrival(),
+              const SizedBox(height: 10),
+              
+              // FIXED: Removed the Row. Services() handles its own internal grid.
+              Container(
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                child: const Services()), 
+              
+              const SizedBox(height: 20),
+              const AboutUsSection(),
+            ],
           ),
         ),
       ),
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // ✅ TEST CONTAINER - You should see this green box
-            Container(
-              height: 100,
-              width: double.infinity,
-              color: Colors.green,
-              child: const Center(
-                child: Text(
-                  'TEST - If you see this, body is working',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // ✅ Try each widget one by one
-            _safeWidget(const CarouselWidget(), 'CarouselWidget'),
-            const SizedBox(height: 20),
-
-            _safeWidget(const Bundle(), 'Bundle'),
-            const SizedBox(height: 20),
-
-            _safeWidget(const NewArrival(), 'NewArrival'),
-            const SizedBox(height: 20),
-
-            _safeWidget(const AboutUsSection(), 'AboutUsSection'),
-            const SizedBox(height: 20),
-
-            _safeWidget(const Services(), 'Services'),
-          ],
-        ),
-      ),
-
-      bottomNavigationBar: const GlassFloatingNavBar(),
+      bottomNavigationBar: const SizedBox(height: 90, child: GlassFloatingNavBar()),
     );
   }
 
@@ -113,3 +79,4 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
+
