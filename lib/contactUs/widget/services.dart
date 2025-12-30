@@ -1,164 +1,105 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:furni_mobile_app/contactUs/widget/service_card.dart';
+import 'package:furni_mobile_app/services/contactus_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class Services extends StatelessWidget{
+class Services extends StatelessWidget {
   const Services({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Container(
-                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(243, 245, 247, 1),
-                  borderRadius: BorderRadius.circular(20)
-                ),
-                padding: EdgeInsets.only(top:30, left:25, right:25, bottom:10),
-                width: w * 0.39,  
-                height: h * 0.25,
-                
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset('assets/images/delivery.svg', width: 48,),
-                    SizedBox(height: 16,),
-                    Text('Free Shipping',
-                    textAlign: TextAlign.start,
+    return FutureBuilder<List<dynamic>>(
+      future: ContactPageService.fetchBlocks(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        if (!snapshot.hasData || snapshot.hasError) {
+          return const SizedBox();
+        }
+
+        final blocks = snapshot.data!;
+
+        final allCards = blocks
+            .where((b) => b['__component'] == 'blocks.card')
+            .toList();
+
+        /// take ONLY last 4 cards (services)
+        final serviceCards = allCards.length >= 4
+            ? allCards.sublist(allCards.length - 4)
+            : allCards;
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: serviceCards.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 0.85,
+          ),
+          itemBuilder: (context, index) {
+            final card = serviceCards[index];
+
+            final String title = card['title'] ?? '';
+            final String text = card['text'] ?? '';
+
+            final String? iconUrl = card['icon'] != null
+                ? 'http://159.65.15.249:1337${card['icon']['url']}'
+                : null;
+
+            return Container(
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(243, 245, 247, 1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.only(
+                top: 30,
+                left: 25,
+                right: 25,
+                bottom: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (iconUrl != null)
+                    SvgPicture.network(
+                      iconUrl,
+                      width: 48,
+                      placeholderBuilder: (_) => const SizedBox(height: 48),
+                    ),
+
+                  const SizedBox(height: 16),
+
+                  Text(
+                    title,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
-                      fontFamily: GoogleFonts.inter().fontFamily
-                    ),),
-                    Text('Order above \$200',
+                      fontFamily: GoogleFonts.inter().fontFamily,
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Text(
+                    text,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       fontFamily: GoogleFonts.inter().fontFamily,
-                      color: Color.fromRGBO(108, 114, 117, 1),
-                    ),
-                    textAlign: TextAlign.start,)
-                  ],
-                ),
-              ),
-              SizedBox(width: 10,),
-              Container(
-                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(243, 245, 247, 1),
-                  borderRadius: BorderRadius.circular(20)
-                ),
-                  padding: EdgeInsets.only(top:30, left:25, right:25, bottom:10),
-                width: w * 0.39,  
-                 height: h * 0.25,
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset('assets/images/money.svg', width: 48,),
-                      SizedBox(height: 16,),
-                      Text('Money-back',
-                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        fontFamily: GoogleFonts.inter().fontFamily
-                      ),),
-                      Text('30 days guarantee',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        fontFamily: GoogleFonts.inter().fontFamily,
-                        color: Color.fromRGBO(108, 114, 117, 1),
-                      ),
-                      textAlign: TextAlign.start,)
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10,),
-          Row(
-            children: [
-              Container(
-                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(243, 245, 247, 1),
-                  borderRadius: BorderRadius.circular(20)
-                ),
-              padding: EdgeInsets.only(top:30, left:25, right:25, bottom:10),
-                width: w * 0.39,  
-                 height: h * 0.25,
-               
-                  child: Center(
-                    
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset('assets/images/lock.svg', width: 48,),
-                        SizedBox(height: 16,),
-                        Text('Secure Payments',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          fontFamily: GoogleFonts.inter().fontFamily
-                        ),),
-                        Text('Secured by stripe',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          fontFamily: GoogleFonts.inter().fontFamily,
-                          color: Color.fromRGBO(108, 114, 117, 1),
-                        ),
-                        textAlign: TextAlign.start,)
-                      ],
+                      color: const Color.fromRGBO(108, 114, 117, 1),
                     ),
                   ),
-                
+                ],
               ),
-              SizedBox(width: 10,),
-      
-              Container(
-                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(243, 245, 247, 1),
-                  borderRadius: BorderRadius.circular(20)
-                ),
-               padding: EdgeInsets.only(top:30, left:25, right:25, bottom:10),
-                width: w * 0.39,  
-                height: h * 0.25,
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset('assets/images/call.svg', width: 48,),
-                      SizedBox(height: 16,),
-                      Text('24/7 Support',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        fontFamily: GoogleFonts.inter().fontFamily
-                      ),),
-                      Text('Phone and Email support',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        fontFamily: GoogleFonts.inter().fontFamily,
-                        color: Color.fromRGBO(108, 114, 117, 1),
-                      ),
-                      textAlign: TextAlign.start,)
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }
