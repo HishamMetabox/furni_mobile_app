@@ -9,7 +9,11 @@ class AuthService {
   /// ======================
   /// REGISTER USER
   /// ======================
-  Future<AppUser?> register(String email, String password) async {
+  Future<AppUser?> register(
+    String email,
+    String password, {
+    required bool rememberMe,
+  }) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/auth/local/register'),
       headers: {'Content-Type': 'application/json'},
@@ -22,13 +26,16 @@ class AuthService {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = jsonDecode(response.body);
-
-      // Save JWT and userId in SharedPreferences
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('jwt', data['jwt']);
-      await prefs.setInt('userId', data['user']['id']);
 
-      // Create AppUser and assign JWT
+      if (rememberMe) {
+        await prefs.setString('jwt', data['jwt']);
+        await prefs.setInt('userId', data['user']['id']);
+        await prefs.setBool('rememberMe', true);
+      } else {
+        await prefs.setBool('rememberMe', false);
+      }
+
       final user = AppUser.fromJson(data['user']);
       user.jwtToken = data['jwt'];
       return user;
@@ -40,7 +47,11 @@ class AuthService {
   /// ======================
   /// LOGIN USER
   /// ======================
-  Future<AppUser?> signIn(String identifier, String password) async {
+  Future<AppUser?> signIn(
+    String identifier,
+    String password, {
+    required bool rememberMe,
+  }) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/auth/local'),
       headers: {'Content-Type': 'application/json'},
@@ -49,13 +60,18 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-
-      // Save JWT and userId in SharedPreferences
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('jwt', data['jwt']);
-      await prefs.setInt('userId', data['user']['id']);
 
-      // Create AppUser and assign JWT
+      if (rememberMe) {
+        await prefs.setString('jwt', data['jwt']);
+        await prefs.setInt('userId', data['user']['id']);
+        await prefs.setBool('rememberMe', true);
+      } else {
+        await prefs.remove('jwt');
+        await prefs.remove('userId');
+        await prefs.setBool('rememberMe', false);
+      }
+
       final user = AppUser.fromJson(data['user']);
       user.jwtToken = data['jwt'];
       return user;
@@ -96,5 +112,13 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('jwt');
     await prefs.remove('userId');
+  }
+
+  Future<bool> shouldAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jwt = prefs.getString('jwt');
+    final rememberMe = prefs.getBool('rememberMe') ?? false;
+
+    return rememberMe && jwt != null;
   }
 }

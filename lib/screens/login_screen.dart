@@ -41,7 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       // signIn returns AppUser? (nullable)
-      final AppUser? user = await authService.signIn(identifier, password);
+      final AppUser? user = await authService.signIn(
+        identifier,
+        password,
+        rememberMe: rememberMe,
+      );
 
       setState(() => isLoading = false);
 
