@@ -28,13 +28,12 @@ class AuthService {
       final data = jsonDecode(response.body);
       final prefs = await SharedPreferences.getInstance();
 
-      if (rememberMe) {
-        await prefs.setString('jwt', data['jwt']);
-        await prefs.setInt('userId', data['user']['id']);
-        await prefs.setBool('rememberMe', true);
-      } else {
-        await prefs.setBool('rememberMe', false);
-      }
+      // ✅ ALWAYS save JWT for current session
+      await prefs.setString('jwt', data['jwt']);
+      await prefs.setInt('userId', data['user']['id']);
+
+      // ✅ Remember Me only controls persistence
+      await prefs.setBool('rememberMe', rememberMe);
 
       final user = AppUser.fromJson(data['user']);
       user.jwtToken = data['jwt'];
@@ -62,15 +61,10 @@ class AuthService {
       final data = jsonDecode(response.body);
       final prefs = await SharedPreferences.getInstance();
 
-      if (rememberMe) {
-        await prefs.setString('jwt', data['jwt']);
-        await prefs.setInt('userId', data['user']['id']);
-        await prefs.setBool('rememberMe', true);
-      } else {
-        await prefs.remove('jwt');
-        await prefs.remove('userId');
-        await prefs.setBool('rememberMe', false);
-      }
+      // ✅ ALWAYS save JWT for current session
+      await prefs.setString('jwt', data['jwt']);
+      await prefs.setInt('userId', data['user']['id']);
+      await prefs.setBool('rememberMe', rememberMe);
 
       final user = AppUser.fromJson(data['user']);
       user.jwtToken = data['jwt'];
@@ -112,6 +106,7 @@ class AuthService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('jwt');
     await prefs.remove('userId');
+    await prefs.remove('rememberMe');
   }
 
   Future<bool> shouldAutoLogin() async {
