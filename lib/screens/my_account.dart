@@ -127,26 +127,27 @@ class _MyAccountState extends State<MyAccount> {
                       const SizedBox(height: 40),
                       Container(
                         height: 48,
-                        width: 330,
+                        width:
+                            MediaQuery.of(context).size.width *
+                            0.85, // ✅ responsive
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: Colors.black),
                         ),
-
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
+                            isExpanded: true, // ✅ prevents overflow
                             value: _selectedValue,
-                            items: <String>['Account', 'Address'].map((
-                              String value,
-                            ) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-
+                            items: const ['Account', 'Address']
+                                .map(
+                                  (value) => DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  ),
+                                )
+                                .toList(),
                             onChanged: (String? newValue) {
                               setState(() {
                                 _selectedValue = newValue!;
