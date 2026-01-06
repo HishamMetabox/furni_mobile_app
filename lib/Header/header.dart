@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furni_mobile_app/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
@@ -105,7 +106,7 @@ class _HeaderState extends State<Header> {
   void _showOverlay() {
     _removeOverlay();
     _overlayEntry = OverlayEntry(builder: (_) => _buildOverlay());
-    Overlay.of(context, rootOverlay: true)!.insert(_overlayEntry!);
+    Overlay.of(context, rootOverlay: true).insert(_overlayEntry!);
   }
 
   void _updateOverlay() {
@@ -204,7 +205,29 @@ class _HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset('assets/images/furniLogo.svg', width: 120, height: 55),
+        GestureDetector(
+          onTap: () {
+            // ✅ Check if current route is HomeScreen
+            if (ModalRoute.of(context)?.settings.name != '/home') {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  settings: const RouteSettings(name: '/home'),
+                  builder: (ctx) => const HomeScreen(),
+                ),
+              );
+            } else {
+              // Already on HomeScreen → do nothing
+              print('Already on HomeScreen, do nothing.');
+            }
+          },
+          child: SvgPicture.asset(
+            'assets/images/furniLogo.svg',
+            width: 120,
+            height: 55,
+          ),
+        ),
+
         const Spacer(),
         if (_showSearch)
           SizedBox(
