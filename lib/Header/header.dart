@@ -207,18 +207,26 @@ class _HeaderState extends State<Header> {
       children: [
         GestureDetector(
           onTap: () {
-            // ✅ Check if current route is HomeScreen
-            if (ModalRoute.of(context)?.settings.name != '/home') {
-              Navigator.pushReplacement(
-                context,
+            final navigator = Navigator.of(context);
+
+            bool homeFound = false;
+
+            navigator.popUntil((route) {
+              if (route.settings.name == '/home') {
+                homeFound = true;
+                return true; // stop popping
+              }
+              return false;
+            });
+
+            if (!homeFound) {
+              navigator.pushAndRemoveUntil(
                 MaterialPageRoute(
                   settings: const RouteSettings(name: '/home'),
-                  builder: (ctx) => const HomeScreen(),
+                  builder: (_) => const HomeScreen(),
                 ),
+                (_) => false,
               );
-            } else {
-              // Already on HomeScreen → do nothing
-              print('Already on HomeScreen, do nothing.');
             }
           },
           child: SvgPicture.asset(

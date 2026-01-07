@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furni_mobile_app/models/user_model.dart';
+import 'package:furni_mobile_app/screens/home_screen.dart';
 import 'package:furni_mobile_app/services/update_profilepicture.dart';
 import 'package:furni_mobile_app/widgets/account%20details.dart';
 import 'package:furni_mobile_app/widgets/address_details.dart';
@@ -47,7 +48,14 @@ class _MyAccountState extends State<MyAccount> {
                 children: [
                   TextButton.icon(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          settings: const RouteSettings(name: '/home'),
+                          builder: (_) => const HomeScreen(),
+                        ),
+                        (route) => false, // removes all previous routes
+                      );
                     },
                     label: Text('back', style: TextStyle(color: Colors.black)),
                     icon: Icon(

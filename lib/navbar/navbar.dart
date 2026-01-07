@@ -63,12 +63,21 @@ class _GlassFloatingNavBarState extends State<GlassFloatingNavBar> {
                       BottomNavigationBarItem(
                         icon: GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const HomeScreen(),
-                              ),
-                            );
+                            // Check if already on HomeScreen
+                            if (ModalRoute.of(context)?.settings.name ==
+                                '/home') {
+                              // Trigger pull-to-refresh
+                              HomeScreen.refreshKey.currentState?.show();
+                            } else {
+                              // Navigate without duplicating HomeScreen
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  settings: const RouteSettings(name: '/home'),
+                                  builder: (_) => const HomeScreen(),
+                                ),
+                              );
+                            }
                           },
                           child: SvgPicture.asset(
                             'assets/images/home2.svg',
